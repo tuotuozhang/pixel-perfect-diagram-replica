@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pixel-perfect diagram scene",
+  "type": "object",
+  "required": ["version", "canvas", "pages"],
+  "properties": {
+    "version": {"const": 1},
+    "canvas": {
+      "type": "object",
+      "required": ["width_px", "height_px"],
+      "properties": {
+        "width_px": {"type": "number", "exclusiveMinimum": 0},
+        "height_px": {"type": "number", "exclusiveMinimum": 0},
+        "px_per_inch": {"type": "number", "exclusiveMinimum": 0, "default": 100},
+        "background": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}
+      },
+      "additionalProperties": false
+    },
+    "metadata": {"type": "object"},
+    "fonts": {"type": "array", "items": {"type": "string"}},
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "reference_image": {"type": "boolean"},
+          "elements": {
+            "type": "array",
+            "items": {"$ref": "#/$defs/element"}
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "color": {"type": ["string", "null"], "pattern": "^#[0-9A-Fa-f]{6}$"},
+    "element": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["rect", "rounded_rect", "ellipse", "text", "polyline", "polygon", "image", "table"]},
+        "name": {"type": "string"},
+        "x": {"type": "number"}, "y": {"type": "number"},
+        "w": {"type": "number"}, "h": {"type": "number"},
+        "fill": {"$ref": "#/$defs/color"},
+        "line": {"$ref": "#/$defs/color"},
+        "line_px": {"type": "number"},
+        "radius_px": {"type": "number"},
+        "opacity": {"type": "number", "minimum": 0, "maximum": 1},
+        "rotation_deg": {"type": "number"},
+        "text": {"type": "string"},
+        "font_family": {"type": "string"},
+        "font_px": {"type": "number"},
+        "font_color": {"$ref": "#/$defs/color"},
+        "bold": {"type": "boolean"},
+        "italic": {"type": "boolean"},
+        "align": {"enum": ["left", "center", "right"]},
+        "valign": {"enum": ["top", "middle", "bottom"]},
+        "margin_px": {"type": "number"},
+        "points": {
+          "type": "array",
+          "items": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2}
+        },
+        "begin_arrow": {"type": "integer"},
+        "end_arrow": {"type": "integer"},
+        "arrow_size": {"type": "integer"},
+        "path": {"type": "string"},
+        "rows": {"type": "array", "items": {"type": "array"}},
+        "cell_w": {"type": "number"}, "cell_h": {"type": "number"},
+        "row_fills": {"type": "array", "items": {"$ref": "#/$defs/color"}},
+        "cell_font_px": {"type": "number"},
+        "cell_font_color": {"$ref": "#/$defs/color"}
+      },
+      "additionalProperties": true
+    }
+  }
+}

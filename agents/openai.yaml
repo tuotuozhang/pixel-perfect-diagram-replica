@@ -1,0 +1,15 @@
+interface:
+  display_name: pixel perfect diagram replica
+  short_description: Reconstruct a reference image as an editable Microsoft Visio
+    VSDX and/or LibreOffice Draw ODG using a pixel-coordinate scene manifest, deterministic
+    vector primitives, an exact reference page, and render-diff iteration. Use for
+    1:1 technical diagrams, flowcharts, trees, tables, posters, and scientific figures.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

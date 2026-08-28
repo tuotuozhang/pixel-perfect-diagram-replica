@@ -1,0 +1,12 @@
+SKILL.md
+README.md
+requirements.txt
+schemas/scene.schema.json
+templates/blank_scene.json
+scripts/vsdx_writer.py
+scripts/build_diagram.py
+scripts/make_scene.py
+scripts/detect_layout.py
+scripts/qa_compare.py
+scripts/install_skill.py
+tests/smoke_test.py
